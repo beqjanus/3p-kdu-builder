@@ -74,12 +74,20 @@ jobs:
           echo "platform=${platform}" >> $GITHUB_ENV
         shell: bash        
 
-      - name: package the 3p-archive
+      - name: configure the 3p-archive
         run: |
           cd autobuild
           autobuild configure --config-file=autobuild.xml -A${{ matrix.addrsize }}
+
+      - name: build the 3p-archive
+        run: |
+          cd autobuild
           autobuild build --config-file=autobuild.xml -A${{ matrix.addrsize }}
-          autobuild package --config-file=autobuild.xml
+
+      - name: build the 3p-archive
+        run: |
+          cd autobuild
+          autobuild package --config-file=autobuild.xml -A${{ matrix.addrsize }}
         shell: bash
 
       - name: rclone copy the packages back to safety
