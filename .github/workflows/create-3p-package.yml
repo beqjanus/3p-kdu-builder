@@ -4,9 +4,6 @@ on:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-env:
-  AUTOBUILD_VARIABLES_FILE: ${{github.workspace}}/build-variables/variables
-  EXTRA_ARGS: -DFMODSTUDIO=Off -DUSE_KDU=Off
 jobs:
   build_matrix:
     strategy:
