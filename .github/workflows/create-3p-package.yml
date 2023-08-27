@@ -56,7 +56,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: beqjanus/3p-kdu
-          ref: main
+          ref: master
           token: ${{ secrets.KDU_ACCESS_TOKEN }} 
           path: .
           fetch-depth: 0
