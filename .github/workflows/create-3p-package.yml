@@ -58,9 +58,6 @@ jobs:
           path: .
           fetch-depth: 0
 
-      - name: debug dump tree
-        run: tree ${{github.workspace}}
-
       - name: Define platform variable(s)
         run: |
           declare -A os_map
