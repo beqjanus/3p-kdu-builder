@@ -57,8 +57,23 @@ jobs:
           token: ${{ secrets.KDU_ACCESS_TOKEN }} 
           path: .
           fetch-depth: 0
+
       - name: debug dump tree
-        run: tree ${{github.workspace}}\
+        run: tree ${{github.workspace}}
+
+      - name: Define platform variable(s)
+        run: |
+          declare -A os_map
+          os_map=( ["Windows"]="windows" ["Linux"]="linux" ["macOS"]="darwin" )
+          platform="${os_map[${{ runner.os}}]}"
+          echo "fallback_platform=${platform}" >> $GITHUB_ENV
+          if [ ${{ matrix.addrsize }} -ne 32 ];
+          then
+            platform+=${{ matrix.addrsize }}
+          fi
+          echo "platform=${platform}" >> $GITHUB_ENV
+        shell: bash        
+        
       - name: package the 3p-archive
         run: |
           cd autobuild
