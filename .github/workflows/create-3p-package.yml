@@ -73,14 +73,14 @@ jobs:
           fi
           echo "platform=${platform}" >> $GITHUB_ENV
         shell: bash        
-        
+
       - name: package the 3p-archive
         run: |
           cd autobuild
-          autobuild configure --config-file=autobuild.xml
-          autobuild build --config-file=autobuild.xml
+          autobuild configure --config-file=autobuild.xml -A${{ matrix.addrsize }}
+          autobuild build --config-file=autobuild.xml -A${{ matrix.addrsize }}
           autobuild package --config-file=autobuild.xml
         shell: bash
 
-      - name: rclone the private 3p packages for this platform (both 64 & 32)
+      - name: rclone copy the packages back to safety
         run: 'rclone copy ./autobuild/*bz2 fs_bundles:'      
