@@ -53,6 +53,10 @@ jobs:
           token: ${{ secrets.KDU_ACCESS_TOKEN }} 
           path: .
           fetch-depth: 0
+      - name: Display directory tree
+        run: |
+          Get-ChildItem -Recurse -Force | Format-List FullName
+        shell: pwsh          
 
       - name: Define platform variable(s)
         run: |
