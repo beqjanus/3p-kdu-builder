@@ -1,5 +1,6 @@
 name: Build KDU binaries and 3p-packages
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
   pull_request:
